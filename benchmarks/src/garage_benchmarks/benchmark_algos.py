@@ -18,7 +18,8 @@ from garage_benchmarks.parameters import Fetch1M_ENV_SET, MuJoCo1M_ENV_SET
 @benchmark
 def ddpg_benchmarks():
     """Run experiments for DDPG benchmarking."""
-    iterate_experiments(ddpg_garage_tf, MuJoCo1M_ENV_SET)
+    iterate_experiments(ddpg_garage_tf, MuJoCo1M_ENV_SET, seeds=[27, 64, 74])
+    # iterate_experiments(ddpg_garage_tf, MuJoCo1M_ENV_SET)
 
 
 @benchmark
