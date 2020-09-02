@@ -15,6 +15,7 @@ REQUIRED = [
     'cma==2.7.0',
     'dowel==0.0.3',
     'numpy>=1.14.5',
+    'pandas',
     'psutil',
     'python-dateutil',
     'ray',
