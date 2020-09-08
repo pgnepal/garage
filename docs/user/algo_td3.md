@@ -9,13 +9,20 @@
    * - **Paper**
      - Addressing Function Approximation Error in Actor-Critic Methods :cite:`Fujimoto2018AddressingFA`
    * - **Framework(s)**
-     - PyTorch, Tensorflow
+     - .. figure:: ./images/pytorch.png
+        :scale: 10%
+
+        PyTorch
+       .. figure:: ./images/tf.png
+        :scale: 20%
+
+        Tensorflow
    * - **API Reference**
      - `garage.tf.algos.TD3 <https://garage.readthedocs.io/en/latest/_autoapi/garage/tf/algos/index.html#garage.tf.algos.TD3>`_
    * - **Code**
      - `garage/tf/algos/td3.py <https://github.com/rlworkgroup/garage/blob/master/src/garage/tf/algos/td3.py>`_
    * - **Examples**
-     - :ref:`td3_pendulum`
+     - :ref:`td3_pendulum_tf`
    * - **Benchmarks**
      - :ref:`td3_garage_tf`
 ```
@@ -36,20 +43,23 @@ actor_update_period=2,
 
 ## Examples
 
-### td3_pendulum
+### td3_pendulum_tf
 
 ```eval_rst
-.. figure:: ./images/tf.png
-        :scale: 10%
 .. literalinclude:: ../../examples/tf/td3_pendulum.py
 ```
 
 ## Benchmarks
 
+### Benchmarks Results
+
+![TD3 TF HalfCheetah-v2](images/td3_tf_HalfCheetah-v2.png) ![TD3 TF Hopper-v2](images/td3_tf_Hopper-v2.png)
+![TD3 TF InvertedDoublePendulum-v2](images/td3_tf_InvertedDoublePendulum-v2.png) ![TD3 TF InvertedPendulum-v2](images/td3_tf_InvertedPendulum-v2.png)
+![TD3 TF Swimmer-v2](images/td3_tf_Swimmer-v2.png)
+
 ### td3_garage_tf
+
 ```eval_rst
-.. figure:: ./images/tf.png
-        :scale: 10%
 .. literalinclude:: ../../benchmarks/src/garage_benchmarks/experiments/algos/td3_garage_tf.py
 ```
 
