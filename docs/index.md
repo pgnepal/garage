@@ -53,6 +53,7 @@ and how to implement new MDPs and new algorithms.
    :maxdepth: 2
    :caption: Reference Guide
 
+   user/environment
    user/environment_libraries
    user/sampling
 
