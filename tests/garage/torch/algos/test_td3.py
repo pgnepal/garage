@@ -1,17 +1,16 @@
 """Test TD3 on InvertedDoublePendulum-v2."""
 import gym
 import pytest
-import torch
 from torch.nn import functional as F
 
-from garage.envs import GarageEnv, normalize
-from garage.experiment import deterministic, LocalRunner
-from garage.experiment.deterministic import set_seed
+from garage.envs import GymEnv, normalize
+from garage.experiment import deterministic
 from garage.replay_buffer import PathBuffer
 from garage.sampler import LocalSampler
 from garage.torch.algos import TD3
 from garage.torch.policies import DeterministicMLPPolicy
 from garage.torch.q_functions import ContinuousMLPQFunction
+from garage.trainer import Trainer
 
 from tests.fixtures import snapshot_config
 
@@ -23,8 +22,8 @@ class TestTD3:
     def test_td3_inverted_double_pendulum(self):
         deterministic.set_seed(0)
 
-        env = GarageEnv(normalize(gym.make('InvertedDoublePendulum-v2')))
-        runner = LocalRunner(snapshot_config)
+        env = GymEnv(normalize(gym.make('InvertedDoublePendulum-v2')))
+        trainer = Trainer(snapshot_config)
 
         policy = DeterministicMLPPolicy(env_spec=env.spec,
                                         hidden_sizes=[64, 64],
@@ -51,8 +50,8 @@ class TestTD3:
                   grad_steps_per_env_step=1,
                   discount=0.99)
 
-        runner.setup(td3, env, sampler_cls=LocalSampler)
-        last_avg_ret = runner.train(n_epochs=10, batch_size=100)
+        trainer.setup(td3, env, sampler_cls=LocalSampler)
+        last_avg_ret = trainer.train(n_epochs=10, batch_size=100)
         assert last_avg_ret > 0
 
         env.close()

@@ -66,7 +66,7 @@ class DeterministicMLPPolicy(Policy):
                 observation, torch.Tensor):
             observation = self._env_spec.observation_space.flatten(observation)
         with torch.no_grad():
-            observation = torch.Tensor(observation).unsqueeze(0))
+            observation = torch.Tensor(observation).unsqueeze(0)
             action, agent_infos = self.get_actions(observation)
             return action[0], {k: v[0] for k, v in agent_infos.items()}
 

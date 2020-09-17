@@ -5,7 +5,7 @@ from garage.np.policies.policy import Policy
 
 
 class UniformRandomPolicy(Policy):
-    """Action taken is uniformly random and decided by the interaction with the environment.
+    """Action taken is uniformly random.
 
     Args:
         env_spec (EnvSpec): Environment spec to explore.

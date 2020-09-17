@@ -4,16 +4,16 @@ import gym
 import torch
 from torch.nn import functional as F
 
-# from garage.np.exploration_policies import AddGaussianNoise
 from garage import wrap_experiment
-from garage.envs import GarageEnv, normalize
-from garage.experiment import LocalRunner
+from garage.envs import GymEnv, normalize
 from garage.experiment.deterministic import set_seed
 from garage.np.exploration_policies import AddGaussianNoise
+from garage.np.policies import UniformRandomPolicy
 from garage.replay_buffer import PathBuffer
 from garage.torch.algos import TD3
 from garage.torch.policies import DeterministicMLPPolicy
 from garage.torch.q_functions import ContinuousMLPQFunction
+from garage.trainer import Trainer
 
 
 @wrap_experiment(snapshot_mode='last')
@@ -28,8 +28,8 @@ def td3_pendulum(ctxt=None, seed=1):
 
     """
     set_seed(seed)
-    runner = LocalRunner(ctxt)
-    env = GarageEnv(normalize(gym.make('InvertedDoublePendulum-v2')))
+    trainer = Trainer(ctxt)
+    env = GymEnv(normalize(gym.make('InvertedDoublePendulum-v2')))
 
     policy = DeterministicMLPPolicy(env_spec=env.spec,
                                     hidden_sizes=[256, 256],
@@ -40,6 +40,8 @@ def td3_pendulum(ctxt=None, seed=1):
                                           policy,
                                           max_sigma=0.1,
                                           min_sigma=0.1)
+
+    uniform_random_policy = UniformRandomPolicy(env.spec)
 
     qf1 = ContinuousMLPQFunction(env_spec=env.spec,
                                  hidden_sizes=[256, 256],
@@ -59,6 +61,7 @@ def td3_pendulum(ctxt=None, seed=1):
               policy_optimizer=torch.optim.Adam,
               qf_optimizer=torch.optim.Adam,
               exploration_policy=exploration_policy,
+              uniform_random_policy=uniform_random_policy,
               target_update_tau=0.005,
               discount=0.99,
               policy_noise_clip=0.5,
@@ -73,8 +76,8 @@ def td3_pendulum(ctxt=None, seed=1):
               buffer_batch_size=100)
 
     td3.to()
-    runner.setup(algo=td3, env=env)
-    runner.train(n_epochs=750, batch_size=100)
+    trainer.setup(algo=td3, env=env)
+    trainer.train(n_epochs=750, batch_size=100)
 
 
 td3_pendulum()
