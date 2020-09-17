@@ -18,7 +18,7 @@ hyper_parameters = {
     'qf_lr': 1e-3,
     'policy_hidden_sizes': [256, 256],
     'qf_hidden_sizes': [256, 256],
-    'n_epochs': 250,
+    'n_epochs': 750,
     'steps_per_epoch': 40,
     'batch_size': 100,
     'start_steps': 1000,

@@ -41,10 +41,11 @@ def ppo_benchmarks():
 @benchmark
 def td3_benchmarks():
     """Run experiments for TD3 benchmarking."""
-    td3_env_ids = [
-        env_id for env_id in MuJoCo1M_ENV_SET if env_id != 'Reacher-v2'
-    ]
-    seeds = [27, 64, 74]
+    # td3_env_ids = [
+    #     env_id for env_id in MuJoCo1M_ENV_SET if env_id != 'Reacher-v2'
+    # ]
+    td3_env_ids = ['Walker2d-v2', 'Hopper-v2', 'Swimmer-v2', 'HalfCheetah-v2', 'InvertedDoublePendulum-v2', 'InvertedPendulum-v2']
+    seeds = [30, 75] #27, 64, 74
     iterate_experiments(td3_garage_pytorch, td3_env_ids, seeds=seeds)
     iterate_experiments(td3_garage_tf, td3_env_ids, seeds=seeds)
 

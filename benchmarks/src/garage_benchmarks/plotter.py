@@ -21,7 +21,7 @@ env_ids = [
     'HalfCheetah-v2', 'Hopper-v2', 'InvertedDoublePendulum-v2', 'Walker2d-v2'
 ]
 
-plot_dir = '/home/resl/iris/plots'  # make sure this dir exists, the script doesn't create it
+plot_dir = '/home/resl/iris/plots/Sept04'  # make sure this dir exists, the script doesn't create it
 if not os.path.exists(plot_dir):
     os.mkdir(plot_dir)
 
